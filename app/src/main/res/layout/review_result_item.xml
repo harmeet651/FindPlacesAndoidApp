@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_marginTop="20dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/review_data_ll"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/review_author_name"
+            android:layout_width="match_parent"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            android:layout_height="wrap_content" />
+        <RatingBar
+            android:id="@+id/rating_review_rating"
+            android:layout_width="wrap_content"
+            android:stepSize="0.1"
+            android:numStars="5"
+            android:rating="4.3"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/review_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/review_text_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+</LinearLayout>

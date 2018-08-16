@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollId"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:paddingBottom="10dp"
+    tools:context=".photoTab">
+ <LinearLayout
+     android:orientation="vertical"
+     android:id="@+id/scrollPhotoLinear"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+ </LinearLayout>
+</ScrollView>
+ <TextView
+     android:id="@+id/no_photo_found"
+     android:text="No Photos"
+     android:layout_centerInParent="true"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent" />
+</RelativeLayout>
