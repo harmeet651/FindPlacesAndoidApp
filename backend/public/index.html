@@ -1,0 +1,2809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC00xSk8OLLyPTwJPMCTxjtOCOYrX-dW6A&libraries=places"></script>
+  <script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="style.css" type="text/css">
+
+</head>
+<script type="text/javascript">
+  var s="";
+  var locWal="";
+  var ayaNex="";
+  var aned="";
+</script>
+<body>
+
+
+<div class="container">
+  <div class="well well-lg ">
+
+    <form>
+
+      <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+
+      <h1 style="text-align: center;font-size: 24px;"><strong>Travel and Entertainment Search</strong></h1>
+
+  <div class="form-group row">
+    <label for="inputKeyword" class="col-sm-2 col-form-label">Keyword</label>
+    <div class="col-sm-10">
+      <input type="input" class="form-control" id="inputKeyword"  data-error="Please enter a keyword." required>
+      <div id="enterKey"></div>
+      <div class="help-block with-errors"></div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
+     <div class="col-sm-6">
+
+      <select class="form-control col-sm-6" id="catu">
+       <option selected id="catuValue">Default</option>
+        <option value="airport">Airport</option>
+        <option value="amusement_park">Amusement Park</option>
+        <option value="aquarium">Aquarium</option>
+        <option value="art_gallery">Art Gallery</option>
+        <option value="bakery">Bakery</option>
+        <option value="bar">Bar</option>
+        <option value="beauty_salon">Beauty Salon</option>
+        <option value="bowling_alley">Bowling Alley</option>
+        <option value="bus_station">Bus Station</option>
+        <option value="cafe">Cafe</option>
+        <option value="campground">Campground</option>
+        <option value="car_rental">Car Rental</option>
+        <option value="casino">Casino</option>
+        <option value="lodging">Lodging</option>
+        <option value="movie_theater">Movie Theater</option>
+        <option value="museum">Museum</option>
+        <option value="night_club">Night Club</option>
+        <option value="park">Park</option>
+        <option value="parking">Parking</option>
+        <option value="restaurant">Restaurant</option>
+        <option value="shopping_mall">Shopping Mall</option>
+        <option value="stadium">Stadium</option>
+        <option value="subway_station">Subway Station</option>
+        <option value="taxi_stand">Taxi Stand</option>
+        <option value="train_station">Train Station</option>
+        <option value="transit_station">Transit Station</option>
+        <option value="travel_agency">Travel Agency</option>
+        <option value="zoo">Zoo</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputDistance" class="col-sm-2 col-form-label">Distance (miles)</label>
+    <div class="col-sm-6">
+      <input type="input" class="form-control" id="dist" placeholder="10">
+    </div>
+  </div>
+  <fieldset class="form-group">
+    <div class="row" >
+      <label for="from" class="col-sm-2 col-form-label">From</label>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="radio" id="radio1" value="radio1he" data-error="Please enter a place." onchange="disableLoc()" checked>
+          <label class="form-check-label" for="gridRadios1">
+            Current location
+          </label>
+        </div>
+      </div>
+    </div>
+        <div class="row">
+      <div class=" col-sm-10 col-md-6 col-md-offset-2">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="radio" id="radio2" value="radio2he" onchange="disableLoc()">
+          <label class="form-check-label" for="gridRadios2">
+            Other, Please specify:
+          </label>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+    </div>
+      <div class="row">
+          <div class="form-group col-sm-9 col-md-offset-3">
+              <input type="input" class="form-control" id="textForLocation" placeholder="Enter a location" onclick="autoKrdoComplete()" disabled="true" required>
+          </div>
+        </div>
+  </fieldset>
+
+  <div class="form-group row">
+     <button type="button" class="btn btn-info" id="search" onclick="chalaDo(); formValKrre2()" disabled="true">
+      <span class="glyphicon glyphicon-search"></span> Search
+    </button>
+    <button type="reset" class="btn btn-light" value="clear" onclick="clearALL()"> Clear</button>
+  </div>
+</div>
+</div>
+    </form>
+    
+  </div>
+  <button class="btn btn-primary col-sm-1 col-md-offset-5" type="submit">Results</button>
+  <button type="button" class="btn btn-outline-primary col-sm-1">Favorites</button>
+</div>
+
+  <div id="formEtheBnao"></div>
+<div id="upbarAndFurther"></div>
+<div id="buttonLai"></div>
+<div id="map" style="width:100%;height:400px;"></div>
+<div id="mapKeneeche"></div>
+<div id="favourites"></div>
+
+  <script type="text/javascript">
+    var inpObj="";
+    //  function formValKrre(){
+      
+    //    inpObj = document.getElementById("inputKeyword");
+    //    if (!inpObj.checkValidity()) {
+    //     if(document.getElementById("search").disabled=true)
+    //     {
+    //       document.getElementById("search").disabled=false;
+    //        console.log("inpobj se aya");
+    //     }document.getElementById("inputKeyword").style.borderColor="red";
+    //     document.getElementById("enterKey").innerHTML = inpObj.validationMessage;
+    //     document.getElementById("search").onclick=formValKrre();
+    //     return false;
+    // } 
+    // else {
+    //     document.getElementById("enterKey").innerHTML = "Input OK";
+    //     document.getElementById("search").disabled=false;
+    // } 
+    //    var str=document.getElementById("inputKeyword").value;
+    //    str = $.trim(str);
+    //   console.log(str);
+    //   if(str=="" && str==undefined && document.getElementById("search").disabled==true)
+    //   {
+    //     console.log("isme aye search");
+    //     //document.getElementById("search").disabled=true;
+    //     document.getElementById("enterKey").innerHTML = str.validationMessage;
+    //     return false;
+    //   }
+    // }
+    function formValKrre2()
+    {
+    //    var locInp= document.getElementById("textForLocation");
+    //    if (!locInp.checkValidity()) {
+    //     document.getElementById("enterKey").innerHTML = inpObj.validationMessage;
+    //     return false;
+    // } 
+    // else {
+    //     document.getElementById("enterKey").innerHTML = "Input OK";
+    // } 
+    if(document.getElementById("textForLocation").disabled==true)
+    {
+      console.log("ok");
+    }
+
+  else if(document.getElementById("textForLocation").value=="" || document.getElementById("textForLocation").value==undefined)
+{
+  document.getElementById("textForLocation").style.borderColor="red";
+   console.log("text se ni aya");
+   document.getElementById("enterKey").innerHTML = "Please enter a keyword";
+  console.log("nor once");
+  document.getElementById("search").disabled=true;
+}
+else{
+   //inpObj=document.getElementById("inputKeyword").value;
+   var str=document.getElementById("inputKeyword").value;
+        str = $.trim(str);
+        console.log("aya else me");
+        if(str=="" || str==undefined)
+{
+  document.getElementById("textForLocation").style.borderColor="red";
+   console.log("text se ni aya");
+
+   document.getElementById("enterKey").innerHTML = "Please enter a keyword";
+  console.log("nor once");
+  document.getElementById("search").disabled=true;
+}
+   document.getElementById("enterKey").innerHTML = "Input OK";
+    document.getElementById("search").disabled=false;
+}
+    }
+    function disableLoc()
+                            {
+                              if(document.getElementById("radio1").checked==true)
+                              {
+                                document.getElementById("textForLocation").disabled=true;
+                                document.getElementById("textForLocation").required=false;
+                              }
+                              else
+                                 
+                                document.getElementById("textForLocation").disabled=false;
+                                document.getElementById("textForLocation").required=true;
+                            }
+                      
+function chalaDo(){
+  
+ if(document.getElementById("inputKeyword").value=="" || document.getElementById("inputKeyword").value==undefined)
+{
+  document.getElementById("inputKeyword").style.borderColor="red";
+   console.log("inpobj se ni aya");
+   document.getElementById("enterKey").innerHTML = "Please enter a keyword";
+  console.log("nor once");
+  
+}
+else{
+   //inpObj=document.getElementById("inputKeyword").value;
+   var str=document.getElementById("inputKeyword").value;
+        str = $.trim(str);
+        console.log("aya else me");
+        if(str=="" || str==undefined)
+{
+  document.getElementById("inputKeyword").style.borderColor="red";
+   console.log("inpobj se ni aya");
+   document.getElementById("enterKey").innerHTML = "Please enter a keyword";
+  console.log("nor once");
+  
+}
+   document.getElementById("enterKey").innerHTML = "Input OK";
+    document.getElementById("search").disabled=false;
+}
+}
+$(document).ready( function() {
+    $.get("http://ip-api.com/json",
+        function(data,statusTxt,xhr){
+            
+            lat = data.lat;
+            lon = data.lon;
+           // var k2 =$("#inputKeyword").val();
+           // if(lat!="" && lon !="" && inpObj!="" && inpObj!=undefined)
+           if(lat!="" && lon !="" )
+           {
+     $('#search').attr('disabled',false);
+   }
+        }
+    );
+});
+
+function autoKrdoComplete(){
+    autoKrComplete(lat,lon);
+  }
+$('#search').click(function(){
+  var key =$("#inputKeyword").val();
+     
+  var dist =$("#dist").val();
+  if(dist<10)
+  {
+    dist=10;
+  }
+  var catu=$("#catu").val();
+  var catuValue=$("#catuValue").text();
+  var distance= dist*1609;
+  if(distance>50000)
+    {
+      distance=50000;
+    }
+  if(document.getElementById("radio1").checked==true)
+    {
+    $.ajax(
+    {
+      url: "/allData?key="+key+"&distance="+distance+"&lat="+lat+"&lon="+lon+"&catu="+catu+"&catuValue="+catuValue,
+      type: "GET",
+
+      success: function(data)
+      {
+          var allData = data;
+          console.log('success111111');
+          mainTable(allData,lat,lon);
+      }
+    })
+    }
+    else
+    {
+      var location=$("#textForLocation").val();
+      $.ajax(
+       {
+      url: "/locWala?location="+location+"&key="+key+"&distance="+distance+"&catu="+catu+"&catuValue="+catuValue,
+      type: "GET",
+
+      success: function(data)
+       {
+          var b=0;
+          var c=0;
+          var locWala = data;
+          console.log('success222222');
+          mainTable(locWala,b,c);
+        }
+       })
+    }  
+});
+
+
+function autoKrComplete(lat,lon){
+  var defaultBounds = new google.maps.LatLngBounds(
+  new google.maps.LatLng(lat, lon),
+  new google.maps.LatLng(lat, lon));
+
+  var input = document.getElementById('textForLocation');
+
+  var searchBox = new google.maps.places.SearchBox(input, {
+    bounds: defaultBounds
+  });
+
+  }
+
+  
+ function mainTable(locWala,lat,lon)
+    {
+      s = locWala;
+      myLatI=[];
+      myLonI=[];
+      var cadata=locWala.next_page_token;
+      console.log("this is the total json",locWala);
+      console.log("I have reached in generate 1",s);
+    
+      html_text="";
+      html_text+="<div class=\"progress\">";
+      html_text+="<div class=\"progress-bar progress-bar-striped progress-bar-animated\" role=\"progressbar\" aria-valuenow=\"75\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 75%\"></div>";
+      html_text+="</div>";
+
+            waheguru="";
+      var tableRow= locWala.results;
+      if(locWala.status=="INVALID_REQUEST")
+      { 
+        html_text="";
+        html_text+="<div class=\"table-responsive\">";
+        html_text+="<div class=\"container-fluid\">";
+        document.getElementById("formEtheBnao").innerHTML=html_text;
+        html_text+="<table class=\"text-center\" id=\"noRecordTable\" align=\"center\"><tr><td>Failed to get search results</td></tr>";
+        html_text+="</table>"
+        html_text+="</div>";
+         document.getElementById("formEtheBnao").innerHTML=html_text;
+         document.getElementById("map").innerHTML="";
+         document.getElementById("mapKeneeche").innerHTML="";
+      }
+      if(!locWala.results[0])
+      { 
+        html_text="";
+        html_text+="<div class=\"table-responsive\">";
+        html_text+="<div class=\"container-fluid\">";
+        document.getElementById("formEtheBnao").innerHTML=html_text;
+        html_text+="<table class=\"text-center\" id=\"noRecordTable\" align=\"center\"><tr><td> NO RECORDS HAVE BEEN FOUND</td></tr>";
+        html_text+="</table>"
+        html_text+="</div>";
+         document.getElementById("formEtheBnao").innerHTML=html_text;
+         document.getElementById("map").innerHTML="";
+         document.getElementById("mapKeneeche").innerHTML="";
+      }
+      else
+      {
+        html_text="";
+       
+        html_text+="<div class=\"container-fluid \">";
+     html_text+="<tr><td><button id=\"detailBtn\" class='btn btn-default' disabled>Details <span class='glyphicon glyphicon-chevron-right'></span></button></td></tr>";      
+      html_text+="<table class=\"table table-hover\" align=\"center\">";
+      html_text+="<tr ><td>#</td><td>Category</td><td>Name</td><td>Address</td><td>Favourite</td><td>Details</td></tr>";
+      for(w=0;w<tableRow.length;w++)
+      {
+        curObj= tableRow[w];
+        var keysVar=Object.keys(curObj);
+        var c=1;
+                for(s=0;s<keysVar.length;s++)
+                {
+                    if(keysVar[s]=="icon"){
+                        icon=curObj[keysVar[s]];
+                    }
+                    if(keysVar[s]=="name"){
+                        name=curObj[keysVar[s]];
+                    }
+                    if(keysVar[s]=="vicinity"){
+                        vicinity=curObj[keysVar[s]];
+                    }
+                    if(keysVar[s]=="place_id"){
+                        id=curObj[keysVar[s]];
+                    }
+                    if(keysVar[s]=="id"){
+                        firstId=curObj[keysVar[s]];
+                    }
+                }                
+                //var myJSON = JSON.stringify(allData);
+                //console.log("ye neeche he stringify ke");
+
+                myLatI[w]=locWala.results[w].geometry.location.lat;
+                myLonI[w]=locWala.results[w].geometry.location.lng;
+               
+
+                 html_text+="<div><tr id=\"yeHetable\"><td>"+(w+1)+"</td><td ><image src="+icon+" alt=\"\"></td> <td name=\"name\" id="+id+">"+name+"</td> <td name=\"name\" class='basFinal' id="+id+" >"+vicinity+"</td><td><button  class='favoClass' id="+id+"><span class='glyphicon glyphicon-star-empty'></span></button></td><td><button class='uparBtnClass' id="+id+"><span class='glyphicon glyphicon-chevron-right'></span></button></td></tr></div>";
+        }
+       html_text+="</table>";
+       html_text+="</div>";
+       html_text+="</div>";
+       
+
+       document.getElementById("formEtheBnao").innerHTML=html_text;
+       document.getElementById("upbarAndFurther").innerHTML="";
+       document.getElementById("map").innerHTML="";
+       document.getElementById("mapKeneeche").innerHTML="";
+     }
+      if(!locWala.next_page_token){
+        console.log("next nai h");
+         document.getElementById("upbarAndFurther").innerHTML="";
+         document.getElementById("map").innerHTML="";
+         document.getElementById("mapKeneeche").innerHTML="";
+       }
+     else{
+       waheguru+="<button type=\"button\" class=\"btn btn-light col-sm-1 col-md-offset-5\" id=\"nextu\">Next</button>";
+       document.getElementById("buttonLai").innerHTML=waheguru;
+       document.getElementById("upbarAndFurther").innerHTML="";
+       document.getElementById("map").innerHTML="";
+       document.getElementById("mapKeneeche").innerHTML="";
+      }
+        $(".favoClass").click(function(){
+          favo(this.id);
+        });
+     $("#yeHetable").click(function(){
+          $(this).css("background-color", "#F4A460");
+        });
+    $(".uparBtnClass").click(function(){
+          upBar(this.id,lat,lon,myLatI,myLonI,locWala); detailFunc(this.id);
+        });
+    $(".basFinal").click(function(){
+          detailKrre(this.id,lat,lon,myLatI,myLonI,locWala);
+        });
+        
+       $('#nextu').click(function(){
+          // $.ajax(
+          // {
+          //   url: "/cadataAya?cadata="+cadata+"&lat="+lat+"&lon="+lon+"&locWala="+locWala,
+          //   type: "GET",
+
+          //   success: function(data)
+          //   {
+          //       var ayaNext = data;
+          //       console.log('success33333',locWala);
+          //       nextMainTable(ayaNext,locWala,lat,lon);
+          //   }
+          // })
+              
+       $.ajax(
+          {
+            url: "/final?placeIdio="+id,
+            type: "GET",
+
+            success: function(data)
+            {
+                var ayaPlace = data;
+                console.log('success44444',ayaPlace);
+                
+            }
+          })
+          }); 
+          
+          document.getElementById("upbarAndFurther").innerHTML="";  
+             document.getElementById("map").innerHTML="";
+}
+function detailKrre(id,lat,lon,myLatI,myLonI,locWala){
+  console.log("detail bula re",locWala);
+  document.getElementById("buttonLai").innerHTML="";
+  document.getElementById("detailBtn").disabled = false;
+  document.getElementById("detailBtn").onclick= function (){upBar(id,lat,lon,myLatI,myLonI,locWala); detailFunc(this.id);}
+}
+function nextMainTable(ayaNext,locWala,lat,lon)
+    {
+      console.log("ayanext",ayaNext);
+       console.log("ayanext locuuuuuuuuuuuuu",locWala);
+      ayaNex=ayaNext;
+      myLatI=[];
+      myLonI=[];
+      var cadata=ayaNext.next_page_token;
+      console.log("this is the new json",ayaNext);
+      console.log("I have reached in generate of next part1");
+    
+      html_text="";
+      waheguru="";
+      document.getElementById("formEtheBnao").innerHTML="";
+      var tableRow= ayaNext.results;
+      if(!ayaNext.results[0])
+      { 
+        html_text="";
+        document.getElementById("formEtheBnao").innerHTML=html_text;
+        html_text+="<table class=\"text-center\" id=\"noRecordTable\" align=\"center\"><tr><td> NO RECORDS HAVE BEEN FOUND</td></tr>";
+        html_text+="</table>"
+         document.getElementById("formEtheBnao").innerHTML=html_text;
+         document.getElementById("map").innerHTML="";
+         document.getElementById("mapKeneeche").innerHTML="";
+      }
+      else
+      {
+        html_text+="<div class=\"container-fluid\">";
+      html_text+="<tr><td><button id=\"detailBtn\" class='btn btn-default' disabled>Details <span class='glyphicon glyphicon-chevron-right'></span></button></td></tr>";   
+      html_text+="<table class=\"table table-hover\" align=\"center\">";
+      html_text+="<tr ><td>#</td><td>Category</td><td>Name</td><td>Address</td><td>Favourite</td><td>Details</td></tr>";
+      for(w=0;w<tableRow.length;w++)
+      {
+        curObj= tableRow[w];
+        var keysVar=Object.keys(curObj);
+        var c=1;
+                for(s=0;s<keysVar.length;s++)
+                {
+                    if(keysVar[s]=="icon"){
+                        icon=curObj[keysVar[s]];
+                    }
+                    if(keysVar[s]=="name"){
+                        name=curObj[keysVar[s]];
+                    }
+                    if(keysVar[s]=="vicinity"){
+                        vicinity=curObj[keysVar[s]];
+                    }
+                    if(keysVar[s]=="place_id"){
+                        id=curObj[keysVar[s]];
+                    }
+                }                
+                //var myJSON = JSON.stringify(allData);
+                //console.log("ye neeche he stringify ke");
+
+                myLatI[w]=ayaNext.results[w].geometry.location.lat;
+                myLonI[w]=ayaNext.results[w].geometry.location.lng;
+               
+
+                 html_text+="<div><tr id=\"yeHetable\"><td>"+(w+1)+"</td><td ><image src="+icon+" alt=\"\"></td> <td name=\"name\" id="+id+">"+name+"</td> <td name=\"name\" class='basFinal' id="+id+" >"+vicinity+"</td><td><button class='btn btn-default'><span class='glyphicon glyphicon-star-empty'></span></button></td><td><button class='uparBtnClass' id="+id+"><span class='glyphicon glyphicon-chevron-right'></span></button></td></tr></div>";
+        }
+       html_text+="</table>";
+       html_text+="</div>";
+       document.getElementById("formEtheBnao").innerHTML=html_text;
+       document.getElementById("upbarAndFurther").innerHTML="";
+       document.getElementById("map").innerHTML="";
+       document.getElementById("mapKeneeche").innerHTML="";
+       if(!ayaNext.next_page_token){
+        console.log("next nai h");
+         waheguru+="<button type=\"button\" class=\"btn btn-light col-sm-1 col-md-offset-5\" id=\"previous\">Previous</button>";
+          document.getElementById("buttonLai").innerHTML=waheguru;
+         document.getElementById("upbarAndFurther").innerHTML="";
+         document.getElementById("map").innerHTML="";
+         document.getElementById("mapKeneeche").innerHTML="";
+       }
+       else{
+       waheguru+="<button type=\"button\" class=\"btn btn-light col-sm-1 col-md-offset-5\" id=\"previous\">Previous</button>";
+       waheguru+="<button type=\"button\" class=\"btn btn-light col-sm-1\" id=\"nextu\">Next</button>";
+       document.getElementById("buttonLai").innerHTML=waheguru;
+       document.getElementById("upbarAndFurther").innerHTML="";
+       document.getElementById("map").innerHTML="";
+       document.getElementById("mapKeneeche").innerHTML="";
+     }
+
+     $("#yeHetable2").click(function(){
+        console.log("isme atohh rha h table 2 me");
+          $(this).css("background-color", "#F4A460");
+        });
+      $(".uparBtnClass").click(function(){
+          upBar(this.id,lat,lon,myLatI,myLonI,ayaNext); detailFunc(id);
+        });
+    $(".basFinal").click(function(){
+          detailKrre(this.id,lat,lon,myLatI,myLonI,ayaNext);
+        });
+        
+        $("#previous").click(function(){
+          console.log("ye wala obj bhej ra hu bhai",locWala);
+          mainTable(locWala,lat,lon);
+   });
+        $("#nextu").click(function(){
+           $.ajax(
+          {
+            url: "/cadataAya?cadata="+cadata+"&lat="+lat+"&lon="+lon+"&ayaNext="+ayaNext,
+            type: "GET",
+
+            success: function(data)
+            {
+                var anedo = data;
+                console.log('success4444444');
+                nextKaMainTable(anedo,ayaNex,locWala,lat,lon);
+            }
+          }) 
+   });
+    }
+}
+function nextKaMainTable(anedo,ayaNext,locWala,lat,lon)
+    {
+      console.log("anedo",anedo);
+      aned=anedo;
+      myLatI=[];
+      myLonI=[];
+      var cadata=anedo.next_page_token;
+      console.log("this is the new json",anedo);
+      console.log("I have reached in generate of next part2");
+    
+      html_text="";
+      waheguru="";
+      document.getElementById("formEtheBnao").innerHTML="";
+      var tableRow= anedo.results;
+      if(!anedo.results[0])
+      { 
+        html_text="";
+        document.getElementById("formEtheBnao").innerHTML=html_text;
+        html_text+="<table class=\"text-center\" id=\"noRecordTable\" border=\"1px\" align=\"center\"><tr><td> NO RECORDS HAVE BEEN FOUND</td></tr>";
+        html_text+="</table>"
+         document.getElementById("formEtheBnao").innerHTML=html_text;
+      }
+      else
+      {
+        html_text+="<div class=\"container-fluid\">";
+       html_text+="<tr><td><button id=\"detailBtn\" class='btn btn-default' disabled>Details <span class='glyphicon glyphicon-chevron-right'></span></button></td></tr>";  
+      html_text+="<table class=\"table table-hover\" border=\"1px\" align=\"center\">";
+      html_text+="<tr ><td>#</td><td>Category</td><td>Name</td><td>Address</td><td>Favourite</td><td>Details</td></tr>";
+      for(w=0;w<tableRow.length;w++)
+      {
+        curObj= tableRow[w];
+        var keysVar=Object.keys(curObj);
+        var c=1;
+                for(s=0;s<keysVar.length;s++)
+                {
+                    if(keysVar[s]=="icon"){
+                        icon=curObj[keysVar[s]];
+                    }
+                    if(keysVar[s]=="name"){
+                        name=curObj[keysVar[s]];
+                    }
+                    if(keysVar[s]=="vicinity"){
+                        vicinity=curObj[keysVar[s]];
+                    }
+                    if(keysVar[s]=="place_id"){
+                        id=curObj[keysVar[s]];
+                    }
+                }                
+                //var myJSON = JSON.stringify(allData);
+                //console.log("ye neeche he stringify ke");
+
+                myLatI[w]=anedo.results[w].geometry.location.lat;
+                myLonI[w]=anedo.results[w].geometry.location.lng;
+               
+
+                html_text+="<div><tr id=\"yeHetable\"><td>"+(w+1)+"</td><td ><image src="+icon+" alt=\"\"></td> <td name=\"name\" id="+id+">"+name+"</td> <td name=\"name\" class='basFinal' id="+id+" >"+vicinity+"</td><td><button class='btn btn-default'><span class='glyphicon glyphicon-star-empty'></span></button></td><td><button class='uparBtnClass' id="+id+"><span class='glyphicon glyphicon-chevron-right'></span></button></td></tr></div>";
+        }
+       html_text+="</table>";
+       html_text+="</div>";
+       document.getElementById("formEtheBnao").innerHTML=html_text;
+       document.getElementById("upbarAndFurther").innerHTML="";
+       document.getElementById("map").innerHTML="";
+    
+        console.log("next nai h");
+         waheguru+="<button type=\"button\" class=\"btn btn-light col-sm-1 col-md-offset-5\" id=\"previous\">Previous</button>";
+          document.getElementById("buttonLai").innerHTML=waheguru;
+         document.getElementById("upbarAndFurther").innerHTML="";
+         document.getElementById("map").innerHTML="";
+         document.getElementById("mapKeneeche").innerHTML="";
+       
+        $("#previous").click(function(){
+          nextMainTable(ayaNex,locWala,lat,lon);
+        });
+         $("#yeHetable3").click(function(){
+          $(this).css("background-color", "#F4A460");
+        });
+         $(".uparBtnClass").click(function(){
+          upBar(this.id,lat,lon,myLatI,myLonI,anedo); detailFunc(this.id);
+        });
+    $(".basFinal").click(function(){
+          detailKrre(this.id,lat,lon,myLatI,myLonI,anedo);
+        });
+        
+    }
+}
+function favo(id){
+  key1="";
+  if (localStorage) {
+    console.log("ye sab aya fav me",id);  
+    var ids=[]; 
+    localStorage.setItem("ids", JSON.stringify(ids));
+    for(i=0;i<ids.length;i++)
+    {
+    ids[i]=id;
+  localStorage.setItem("ids", JSON.stringify(ids));
+}
+  var abcde=JSON.parse(localStorage.getItem("ids"));
+console.log("length",abcde);
+  // console.log("string",abcde);
+
+  // var edr=JSON.parse(abcde);
+  // console.log("dubara normal",edr);
+// for(i=0;i<abcde.length;i++)
+// {
+//   var request = { placeId: i };
+
+//   service = new google.maps.places.PlacesService(document.getElementById("upbarAndFurther"));
+//   service.getDetails(request, callback);
+
+//   function callback(place, status)
+//   {
+//     if (status == google.maps.places.PlacesServiceStatus.OK)
+//     {
+     
+//   console.log("ids, are, ",place);
+//   document.getElementById("formEtheBnao").innerHTML="";
+//   document.getElementById("favourites").innerHTML=html_text;
+//   document.getElementById("buttonLai").innerHTML="";
+//   document.getElementById("upbarAndFurther").innerHTML="";     
+//   document.getElementById("map").innerHTML="";
+//   document.getElementById("mapKeneeche").innerHTML="";
+// } 
+// }
+// }
+}
+else {
+  // No support. Use a fallback such as browser cookies or store on the server.
+}
+}
+  function upBar(id,lat,lon,myLatI,myLonI,locWala){
+    //var aba=idi;
+    //var es=ed;
+    console.log(id);
+    console.log(lat);
+    console.log(lon);
+    console.log(myLatI);
+    console.log(myLonI);
+    //console.log("name",name);
+     var request = { placeId: id };
+    service = new google.maps.places.PlacesService(document.getElementById("upbarAndFurther"));
+  service.getDetails(request, callback);
+
+  function callback(place, status)
+  {
+    if (status == google.maps.places.PlacesServiceStatus.OK)
+    {
+    abc="";
+    abc+="<div class='container-fluid'><div id=\"heading1\"><h2 id="+id+">"+place.name+"</h2><div id=\"listVist\"<tr><td><button id='listBai' class='btn btn-default' ><span class='glyphicon glyphicon-chevron-left'></span>List</button></td><td><button class='btn btn-default' id=\"twittersathwala\" push-right><span class='glyphicon glyphicon-star-empty'></span></button></td><td><button type='button' class=\"btn btn-primary\" push-right id=\"twiti\"> <a href=\"https://twitter.com/intent/tweet?text=Check%20out%20"+place.name+"%20Website:"+place.url+"\"><img  src=\"http://cs-server.usc.edu:45678/hw/hw8/images/Twitter.png\"></img></a></button></td></tr></div></div><ul class='nav nav-tabs'><li class='active'><a id="+id+" onclick='detailFunc(this.id)'>Info</a></li><li><a id="+id+" onclick='photoShoto(this.id)'>Photos</a></li><li><a id="+id+" name="+name+" onclick='discoMaps(this.id,"+lat+","+lon+","+myLatI+","+myLonI+")'>Maps</a></li><li><a id="+id+" onclick=\"reviewShivyu(this.id)\">Reviews</a></li></ul></div>";  
+    document.getElementById("formEtheBnao").innerHTML=abc;
+document.getElementById("map").innerHTML="";
+document.getElementById("mapKeneeche").innerHTML="";
+     $("#listBai").click(function(){
+          mainTable(locWala,lat,lon);
+        });
+
+   $(document).ready(function() {
+  $('li.active').removeClass('active');
+  $('a[href="' + location.pathname + '"]').closest('li').addClass('active'); 
+});
+    console.log("upbar");
+  }
+  }
+
+}
+  function detailFunc(placeId)
+{ 
+  var a="";
+  var addr="";
+  var phoneNo="";
+  var rating="";
+  var priceL="";
+  var goog="";
+  var openT="";
+  //boolean (openT)=false;
+  var oi="";
+  var pehlA="";
+  var timeT="";
+  var week="";
+  var html_text="";
+  console.log("id agyi details me");
+  var request = { placeId: placeId };
+
+  service = new google.maps.places.PlacesService(document.getElementById("upbarAndFurther"));
+  service.getDetails(request, callback);
+
+  function callback(place, status)
+  {
+    if (status == google.maps.places.PlacesServiceStatus.OK)
+    {
+         a=place;
+         //console.log("a",a);
+         console.log("Ab me bna ra hu details ka table",place);
+         addr=a.formatted_address;    
+         phoneNo=a.formatted_phone_number;
+          priceL=a.price_level;
+          rating=a.rating;
+          ratIng=a.rating;
+          goog=a.url;
+          web=a.website;
+          if(a.opening_hours)
+          {
+          pehlA=a.opening_hours;
+          oi=a.opening_hours.open_now;
+          timeT=a.opening_hours.periods;
+          week=a.opening_hours.weekday_text;
+          }
+
+
+
+          dhanju=""; 
+          dhanju+="<div class=\"container-fluid\">";
+          dhanju+="<table class=\"table table-striped\" align=\"center\">";
+           if(!addr)
+          {
+            dhanju+="<tr></tr>";
+          }
+          else{
+             dhanju+="<tr><td class='col-md-2' >Address</td><td class='col-md-2'>"+addr+"</td><td class='col-md-2'></td></tr>";
+          }
+          if(!phoneNo)
+          {
+            dhanju+="<tr></tr>";
+          }
+          else{
+            dhanju+="<tr><td class='col-md-2'>Phone Number</td><td class='col-md-2'>"+phoneNo+"</td><td class='col-md-2'></td></tr>";
+          }
+          if(!priceL)
+          {
+            dhanju+="<tr></tr>";
+          }
+          else{
+            dhanju+="<tr><td class='col-md-2'>Price Level</td><td class='col-md-2'>"+priceL+"</td><td class='col-md-2'></td></tr>";
+          }
+          if(!rating)
+          {
+            dhanju+="<tr></tr>";
+          }
+          else{
+            dhanju+="<tr><td class='col-md-2' "+ratIng+">Rating</td><td class='col-md-2'>"+ratIng+"</td>";
+             dhanju+="<td id=\"krdoRate\" class='col-md-2'>";
+            $(function () {
+              $("#krdoRate").rateYo({
+                rating: (ratIng/
+                Math.ceil(ratIng))*100+"%",
+                numStars:Math.ceil(ratIng),
+                starWidth: "15px",
+                normallFill:"transparent",
+                readOnly: true
+              });
+            });
+            dhanju+="</td></tr>";
+          }
+          if(!goog)
+          {
+            dhanju+="<tr></tr>";
+          }
+          else{
+            dhanju+="<tr><td class='col-md-2'>Google Page</td><td class='col-md-2'><a href="+goog+" target=\"_blank\">"+goog+"</a></td><td class='col-md-2'></td></tr>";
+          }
+          if(!web)
+          {
+            dhanju+="<tr></tr>";
+          }
+          else{
+            dhanju+="<tr><td class='col-md-2'>Website</td><td class='col-md-2'><a href="+web+" target=\"_blank\">"+web+"</a></td><td class='col-md-2'></td></tr>";
+          }
+          if(!pehlA)
+          {
+               if(!oi && !week)
+              
+              {
+                dhanju+="";
+              }
+          
+          }
+          else
+          {
+                  if(a.opening_hours.open_now==true)
+                  {
+                    openT="Open";
+                  }
+                  else{
+                    openT="Closed";
+                  }
+            dhanju+="<tr><td class='col-md-2'>Hours</td><td class='col-md-2'>"+openT+"<a data-toggle=\"modal\" data-target=\"#myModal\" href=> Daily open hours</a></td><td class='col-md-2'></td></tr>";
+              dhanju+="<div id=\"myModal\" class=\"modal fade\"  tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">";
+                dhanju+="<div class=\"modal-dialog\" role=\"document\">";
+
+                 dhanju+=" <div class=\"modal-content\">";
+                  dhanju+="  <div class=\"modal-header\">";
+                  dhanju+=" <h4 class=\"modal-title\" id=\"exampleModalLabel\">Open hours</h4>";
+                    dhanju+="  <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>";
+                     
+                    dhanju+="</div>";
+                    var d = new Date();
+                    var n = d.getDay()
+                    if(n==1)
+                    {
+                    dhanju+="<div class=\"modal-body\">";
+                   dhanju+=" <strong><p>"+week[0]+"</p></strong>";
+                   dhanju+=" <p>"+week[1]+"</p>";
+                   dhanju+=" <p>"+week[2]+"</p>";
+                   dhanju+=" <p>"+week[3]+"</p>";
+                   dhanju+=" <p>"+week[4]+"</p>";
+                   dhanju+=" <p>"+week[5]+"</p>";
+                   dhanju+=" <p>"+week[6]+"</p>";
+                   dhanju+=" </div>";
+                    }
+                    else if(n==2)
+                    {
+                    dhanju+="<div class=\"modal-body\">";
+                   dhanju+=" <strong><p>"+week[1]+"</p></strong>";
+                   dhanju+=" <p>"+week[2]+"</p>";
+                   dhanju+=" <p>"+week[3]+"</p>";
+                   dhanju+=" <p>"+week[4]+"</p>";
+                   dhanju+=" <p>"+week[5]+"</p>";
+                   dhanju+=" <p>"+week[6]+"</p>";
+                   dhanju+=" <p>"+week[0]+"</p>";
+                   dhanju+=" </div>";
+                    }
+                    else if(n==3)
+                    {
+                    dhanju+="<div class=\"modal-body\">";
+                   dhanju+=" <strong><p>"+week[2]+"</p></strong>";
+                   dhanju+=" <p>"+week[3]+"</p>";
+                   dhanju+=" <p>"+week[4]+"</p>";
+                   dhanju+=" <p>"+week[5]+"</p>";
+                   dhanju+=" <p>"+week[6]+"</p>";
+                   dhanju+=" <p>"+week[0]+"</p>";
+                   dhanju+=" <p>"+week[1]+"</p>";
+                   dhanju+=" </div>";
+                    }
+                    else if(n==4)
+                    {
+                    dhanju+="<div class=\"modal-body\">";
+                   dhanju+="<strong> <p>"+week[3]+"</p></strong>";
+                   dhanju+=" <p>"+week[4]+"</p>";
+                   dhanju+=" <p>"+week[5]+"</p>";
+                   dhanju+=" <p>"+week[6]+"</p>";
+                   dhanju+=" <p>"+week[0]+"</p>";
+                   dhanju+=" <p>"+week[1]+"</p>";
+                   dhanju+=" <p>"+week[2]+"</p>";
+                   dhanju+=" </div>";
+                    }
+                     else if(n==5)
+                    {
+                    dhanju+="<div class=\"modal-body\">";
+                   dhanju+=" <strong><p>"+week[4]+"</p></strong>";
+                   dhanju+=" <p>"+week[5]+"</p>";
+                   dhanju+=" <p>"+week[6]+"</p>";
+                   dhanju+=" <p>"+week[0]+"</p>";
+                   dhanju+=" <p>"+week[1]+"</p>";
+                   dhanju+=" <p>"+week[2]+"</p>";
+                    dhanju+=" <p>"+week[3]+"</p>";
+                   dhanju+=" </div>";
+                    }
+                     else if(n==6)
+                    {
+                    dhanju+="<div class=\"modal-body\">";
+                   dhanju+=" <strong><p>"+week[5]+"</p></strong>";
+                   dhanju+=" <p>"+week[6]+"</p>";
+                   dhanju+=" <p>"+week[0]+"</p>";
+                   dhanju+=" <p>"+week[1]+"</p>";
+                   dhanju+=" <p>"+week[2]+"</p>";
+                    dhanju+=" <p>"+week[3]+"</p>";
+                    dhanju+=" <p>"+week[4]+"</p>";
+                   dhanju+=" </div>";
+                    }
+                     else if(n==7)
+                    {
+                    dhanju+="<div class=\"modal-body\">";
+                   dhanju+=" <strong><p>"+week[6]+"</p></strong>";
+                   dhanju+=" <p>"+week[0]+"</p>";
+                   dhanju+=" <p>"+week[1]+"</p>";
+                   dhanju+=" <p>"+week[2]+"</p>";
+                    dhanju+=" <p>"+week[3]+"</p>";
+                    dhanju+=" <p>"+week[4]+"</p>";
+                    dhanju+=" <p>"+week[5]+"</p>";
+                   dhanju+=" </div>";
+                    }
+                   dhanju+=" <div class=\"modal-footer\">";
+                   dhanju+="   <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>";
+                 dhanju+="   </div>";
+                  dhanju+="</div>";
+
+               dhanju+=" </div>";
+
+              dhanju+="</div>"; 
+              }      
+          dhanju+="</table>";
+        
+          document.getElementById("buttonLai").innerHTML="";
+          document.getElementById("upbarAndFurther").innerHTML=dhanju;     
+          document.getElementById("map").innerHTML="";
+          document.getElementById("mapKeneeche").innerHTML="";
+        }      
+     }   
+}
+
+  function photoShoto(pl)
+  {
+    console.log(pl);
+     var pho="";
+      var request = { placeId: pl };
+
+       service = new google.maps.places.PlacesService(document.getElementById("upbarAndFurther"));
+       service.getDetails(request, callback);
+
+      console.log("id agyi photos me");
+      function callback(place, status)
+  {
+    if (status == google.maps.places.PlacesServiceStatus.OK)
+    {
+ 
+      pho = place.photos;
+      console.log(pho);
+
+      if (!pho)
+      {
+        html_text="";
+        html_text+="<div class=\"container-fluid\">";
+         document.getElementById("upbarAndFurther").innerHTML=html_text;
+        html_text+="<table class=\"text-center\" id=\"noRecordTable\" align=\"center\"><tr><td> NO PHOTOS HAVE BEEN FOUND</td></tr>";
+        html_text+="</table>"
+        html_text+="</div>";
+         document.getElementById("upbarAndFurther").innerHTML=html_text;
+         document.getElementById("map").innerHTML="";
+      }
+      else
+      {
+        console.log("photo bna re h");
+        html_text="";
+        html_text+="<div class='container-fluid'>";
+        html_text+="<div class='row'>";
+        html_text+="<div class='column'>";
+       if(pho[0]){
+        html_text+="<a href="+pho[0].getUrl({'maxWidth': 500, 'maxHeight': 500})+" target=\"_blank\"><img class='potato' src="+pho[0].getUrl({'maxWidth': 400, 'maxHeight': 400})+" alt=\"\"></img></a>";
+      }
+      else{
+        console.log("nothing");
+      }
+       if(pho[1]){
+        html_text+="<a href="+pho[1].getUrl({'maxWidth': 500, 'maxHeight': 500})+" target=\"_blank\"><img class='potato' src="+pho[1].getUrl({'maxWidth': 400, 'maxHeight': 400})+" alt=\"\"></img></a>";
+      }
+       else{
+        console.log("nothing");
+      }
+         if(pho[2]){
+        html_text+="<a href="+pho[2].getUrl({'maxWidth': 500, 'maxHeight': 500})+" target=\"_blank\"><img class='potato' src="+pho[2].getUrl({'maxWidth': 400, 'maxHeight': 400})+" alt=\"\"></img></a>";
+      }
+       else{
+        console.log("nothing");
+      }
+         if(pho[3]){
+        html_text+="<a href="+pho[3].getUrl({'maxWidth': 500, 'maxHeight': 500})+" target=\"_blank\"><img class='potato' src="+pho[3].getUrl({'maxWidth': 400, 'maxHeight': 400})+" alt=\"\"></img></a>";
+      }
+       else{
+        console.log("nothing");
+      }
+        
+        html_text+="</div>";
+        html_text+="<div class='column'>";
+         if(pho[4]){
+        html_text+="<a href="+pho[4].getUrl({'maxWidth': 500, 'maxHeight': 500})+" target=\"_blank\"><img class='potato' src="+pho[4].getUrl({'maxWidth': 400, 'maxHeight': 400})+" alt=\"\"></img></a>";
+      }
+       else{
+        console.log("nothing");
+      }
+         if(pho[5]){
+        html_text+="<a href="+pho[5].getUrl({'maxWidth': 500, 'maxHeight': 500})+" target=\"_blank\"><img class='potato' src="+pho[5].getUrl({'maxWidth': 400, 'maxHeight': 400})+" alt=\"\"></img></a>";
+      }
+       else{
+        console.log("nothing");
+      }
+         if(pho[6]){
+        html_text+="<a href="+pho[6].getUrl({'maxWidth': 500, 'maxHeight': 500})+" target=\"_blank\"><img class='potato' src="+pho[6].getUrl({'maxWidth': 400, 'maxHeight': 400})+" alt=\"\"></img></a>";
+      }
+       else{
+        console.log("nothing");
+      }
+         if(pho[7]){
+        html_text+="<a href="+pho[7].getUrl({'maxWidth': 500, 'maxHeight': 500})+" target=\"_blank\"><img class='potato' src="+pho[7].getUrl({'maxWidth': 400, 'maxHeight': 400})+" alt=\"\"></img></a>";
+      } else{
+        console.log("nothing");
+      }
+        
+        html_text+="</div>";
+        html_text+="<div class='column'>";
+        if(pho[8]){
+        html_text+="<a href="+pho[8].getUrl({'maxWidth': 500, 'maxHeight': 500})+" target=\"_blank\"><img class='potato' src="+pho[8].getUrl({'maxWidth': 400, 'maxHeight': 400})+" alt=\"\"></img></a>";
+      }
+       else{
+        console.log("nothing");
+      }
+         if(pho[9]){
+        html_text+="<a href="+pho[9].getUrl({'maxWidth': 500, 'maxHeight': 500})+" target=\"_blank\"><img class='potato' src="+pho[9].getUrl({'maxWidth': 400, 'maxHeight': 400})+" alt=\"\"></img></a>";
+      }
+       else{
+        console.log("nothing");
+      }
+        html_text+="</div>";
+        html_text+="</div>";
+        html_text+="</div>";
+       document.getElementById("upbarAndFurther").innerHTML=html_text;
+       document.getElementById("map").innerHTML="";
+
+     }
+  }
+}
+}
+
+function discoMaps(id,lat,lon,myLatI,myLonI)
+{
+  aa="";
+  console.log(lat);
+    console.log(lon);
+    console.log(myLatI);
+    console.log(myLonI);
+  console.log("id",id);
+   var request = { placeId: id };
+
+       service = new google.maps.places.PlacesService(document.getElementById("upbarAndFurther"));
+       service.getDetails(request, callback);
+
+      console.log("id agyi maps me");
+  function callback(place, status)
+        {
+          if (status == google.maps.places.PlacesServiceStatus.OK)
+          {
+       aa=place.name+', '+place.formatted_address;
+
+ console.log(aa);
+  html_text="";
+  html_text+="<div class='container-fluid'>";
+  html_text+="<form>";
+  html_text+="<div class='form-row'>";
+  html_text+="<div class='col-md-3'>";
+  html_text+="<label for='one'>From</label>";
+  html_text+="<input type='text' class='form-control' id=\"one\" value=\"Your location\" onclick=\"autoEkhor()\">";
+  html_text+="</div>";
+  html_text+="<div class='col-md-3'>";
+  html_text+="<label for='two'>To</label>";
+  html_text+="<input type='text' class='form-control' id=\"two\" value=\""+aa+"\" readonly>";
+  html_text+="</div>";
+  html_text+="<div class='col-md-3'>";
+  html_text+="<label for='three'>Travel Mode</label>";
+   html_text+="<select id=\"mode\">";
+   html_text+="<option class='form-control' value=\"DRIVING\">Driving</option>";
+   html_text+="<option class='form-control' value=\"WALKING\">Walking</option>";
+   html_text+="<option class='form-control' value=\"BICYCLING\">Bicycling</option>";
+   html_text+="<option class='form-control' value=\"TRANSIT\">Transit</option>";
+  html_text+="</select>";
+  html_text+="</div>";
+  html_text+="</div>";
+  html_text+="<div class='col-md-3'>";
+  html_text+="<label class=\"control-label\">Directions</label>";
+  html_text+="<button type=\"button\" class=\"btn btn-primary\" id=\"buttonGetDir\">Get Directions</button>";
+  html_text+="</div>";
+  html_text+="</div>";
+  html_text+="</form>";
+  html_text+="<div class='col-md-12' id='ababab'></div>";
+  html_text+="<div><button type='button' class=\"btn btn-primary\" id='pegBtn'> <img id=\"pegMan\" src=\"http://cs-server.usc.edu:45678/hw/hw8/images/Pegman.png\"></img></button></div>";
+  //html_text+="<div id=\"map\" style=\" width:70%; height:100%\"></div>";
+  html_text+="<div id=\"directionsPanel\" style=\" margin-top: 50px; width:100%; height: 100%\"></div>";
+   html_text+="</div>";
+
+  
+   document.getElementById("upbarAndFurther").innerHTML=html_text;
+
+  var directionsService = new google.maps.DirectionsService();
+  var directionsDisplay = new google.maps.DirectionsRenderer();
+  var lA = {lat: lat, lng:lon};
+  console.log("dest ke lat lon");
+  var mapOptions = {
+    zoom:15,
+    center: lA
+  }
+  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+ // directionsDisplay.setMap(map);
+  var marker = new google.maps.Marker({
+          position: lA,
+          map: map
+        });
+
+  $("#buttonGetDir").click(function(){
+    callMaps(place,lat,lon,myLatI,myLonI);
+   });
+  $("#pegBtn").click(function()
+  {
+    peguDafunc(lat,lon,myLatI,myLonI);
+  });
+  }
+}
+}
+
+  function callMaps(place,lat,lon,myLatI,myLonI)
+  { 
+    console.log("place agya end meeeee",place);
+    console.log("place agya end meeeee",lat);
+    //console.log("place agya end meeeee",nyaLat);
+    var lA = {lat: myLatI, lng: myLonI};
+    var mapOptions = {
+    zoom:19,
+    center: lA
+    }
+   map = new google.maps.Map(document.getElementById('map'), mapOptions);
+   marker = new google.maps.Marker({
+          position: lA,
+          map: map
+        });
+   directionsService = new google.maps.DirectionsService();
+   directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsDisplay.setMap(map);
+ 
+  if(document.getElementById("one").value=="Your location")
+  {
+    console.log(document.getElementById("one").value);
+    var start = new google.maps.LatLng(lat, lon);
+    console.log("khud aye start lat lon val",start);
+  }
+  else
+  {
+    var start = document.getElementById("one").value;
+    console.log("location box se aye lat lon val",start);
+  }
+  var end = document.getElementById("two").value=place.name+', '+place.formatted_address;
+
+
+    var sel=document.getElementById("mode").value;
+    console.log("sel me ara", sel);
+
+  
+   console.log("end val",end);
+   var lA = {lat: myLatI, lng: myLonI};
+  var request = {
+    origin: start,
+    destination: end,
+    provideRouteAlternatives: true,
+    travelMode: google.maps.TravelMode[sel]
+  };
+  document.getElementById("mapKeneeche").innerHTML="";
+
+  directionsDisplay.setPanel(document.getElementById('mapKeneeche'));
+  directionsService.route(request, function(result, status)
+   {
+    if (status == 'OK') 
+    {
+      directionsDisplay.setDirections(result);
+    }
+  });
+}
+ 
+ function peguDafunc(lat,lon,myLatI,myLonI)
+ {
+  console.log("inside pegu1");
+    console.log(lat);
+    console.log(lon);
+    console.log(myLatI);
+    console.log(myLonI);
+      console.log("inside pegu2");
+      var lA = {lat: myLatI, lng: myLonI};
+       var panorama = new google.maps.StreetViewPanorama(
+      document.getElementById("map"), {
+        position: lA,
+        pov: {
+          heading: 34,
+          pitch: 10
+        }
+      });
+  map.setStreetView(panorama);
+  // document.getElementById("pegMan").src=="http://cs-server.usc.edu:45678/hw/hw8/images/Map.png";
+    
+  //   else if(document.getElementById("pegMan").src=="http://cs-server.usc.edu:45678/hw/hw8/images/Map.png")
+  //   {
+  //     document.getElementById("pegMan").src=="http://cs-server.usc.edu:45678/hw/hw8/images/Pegman.png";
+  //     lA = {lat: myLatI, lng: myLonI};
+  //     var mapOptions = 
+  //     {
+  //     zoom:19,
+  //     center: lA
+  //     }
+  //  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  // directionsDisplay.setMap(map);
+  //  marker = new google.maps.Marker({
+  //         position: lA,
+  //         map: map
+  //       });
+  // directionsDisplay.setMap(map);
+  //   }
+}
+
+      function autoEkhor(){
+        console.log("inside auto two");
+        var inputa = document.getElementById("one");
+        var autocomplete = new google.maps.places.Autocomplete(inputa);
+      }
+
+
+function reviewShivyu(idAI)
+  {
+        html_text="";
+        var aa="";
+        var request = { placeId: idAI };
+
+       service = new google.maps.places.PlacesService(document.getElementById("upbarAndFurther"));
+       service.getDetails(request, callback);
+
+  function callback(place, status)
+  {
+    if (status == google.maps.places.PlacesServiceStatus.OK)
+    {
+                      
+                     
+                      html_text+="<div class='container-fluid'>";
+                      html_text+="<div class='row'>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<button class='btn btn-secondary dropdown-toggle' type='button1' value='aa' id='d1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Google Reviews</button>";
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink1>";
+                       html_text+="<button class='dropdown-item'></button>";
+                       html_text+="<button class='dropdown-item' id=\"d2\" value=\"ab\">Google Reviews</button><br>";
+                      html_text+="<button class='dropdown-item' value='ac' id='d3'>Yelp Reviews</button>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<a class='btn btn-secondary dropdown-toggle' type='button' value=\"abra\" id=\"katabra\" data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Default Rating</a>";
+
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink2'>";
+                      html_text+="<button class='dropdown-item' id=\"d4\" value=\"ad\">Default Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d5\" value=\"ae\">Highest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d6\" value=\"af\">Lowest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d7\" value=\"ag\">Most Recent</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d8\" value=\"ah\">Least Recent</button><br>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                     
+
+        rev=place.reviews;
+       
+        var authName, ratingZ, timez, timedez, profilePic, revText, urllz;
+
+        if (!rev)
+      {
+        html_text="";
+        
+                      html_text+="<div class='container-fluid'>";
+                      html_text+="<div class='row'>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<button class='btn btn-secondary dropdown-toggle' type='button1' value='aa' id='d1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Google Reviews</button>";
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink1>";
+                       html_text+="<button class='dropdown-item'></button>";
+                       html_text+="<button class='dropdown-item' id=\"d2\" value=\"ab\">Google Reviews</button><br>";
+                      html_text+="<button class='dropdown-item' value='ac' id='d3'>Yelp Reviews</button>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<a class='btn btn-secondary dropdown-toggle' type='button' value=\"abra\" id=\"katabra\" data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Default Rating</a>";
+
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink2'>";
+                      html_text+="<button class='dropdown-item' id=\"d4\" value=\"ad\">Default Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d5\" value=\"ae\">Highest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d6\" value=\"af\">Lowest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d7\" value=\"ag\">Most Recent</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d8\" value=\"ah\">Least Recent</button><br>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+         document.getElementById("upbarAndFurther").innerHTML=html_text;
+        html_text+="<table class=\"text-center\" id=\"noRecordTable\" align=\"center\"><tr><td> NO REVIEWS HAVE BEEN FOUND</td></tr>";
+        html_text+="</table>"
+        html_text+="</div>";
+         document.getElementById("upbarAndFurther").innerHTML=html_text;
+         document.getElementById("map").innerHTML="";
+         document.getElementById("mapKeneeche").innerHTML="";
+      }
+
+        if(!rev=="")
+            {
+        html_text+="<div id=\"revTable\" class=\"table-responsive\">";
+        html_text+="<table id=\"reviewTable\" align=\"center\">";
+  
+            for(i=0;i<rev.length;i++)
+            {
+
+              currReview=rev[i];
+            var keyRev=Object.keys(currReview);
+
+            for(j=0;j<keyRev.length;j++)
+            { 
+               if(keyRev[j]=="author_name")
+                     {  
+                        authName=currReview[keyRev[j]];
+                     }
+               if(keyRev[j]=="profile_photo_url")
+                     {
+                        profilePic=currReview[keyRev[j]];
+                     }
+               if(keyRev[j]=="text")
+                     {
+                        revText=currReview[keyRev[j]];
+                     }
+               if(keyRev[j]=="rating")
+                     {
+                        ratingZ=currReview[keyRev[j]];
+                     }
+               if(keyRev[j]=="time")
+                     {
+                        timez=currReview[keyRev[j]];
+                     }
+               if(keyRev[j]=="author_url")
+                     {
+                        urllz=currReview[keyRev[j]];
+                     }
+              }
+
+                    var utcSeco = timez;
+                    var d = new Date(0);
+                    d.setUTCSeconds(utcSeco);
+                       
+                         html_text+="<tr id=\"revRow1\"><td id=\"id01\"><a href="+urllz+"><img class=\"thumbnail\" src="+profilePic+" align=\"center\" alt=\"\"/></a></td><td><a href="+urllz+">"+authName+"</a><br>"+ratingZ+" Stars, "+d+"<p>"+revText+"</p></td></tr>";
+                                       
+            }
+             html_text+="</table>";
+             html_text+="</div>";
+           }
+        document.getElementById("upbarAndFurther").innerHTML=html_text;
+        document.getElementById("map").innerHTML="";
+        document.getElementById("mapKeneeche").innerHTML="";
+
+        $("#d4").click(function(){
+          console.log("aagai lao me idddddd",idAI);
+         orderLao2(place,idAI);
+          });
+        $("#d6").click(function(){
+         orderLao(place,idAI);
+          });
+         $("#d5").click(function(){
+          orderLao3(place,idAI);
+           });
+         $("#d7").click(function(){
+          orderLao4(place,idAI);
+           });
+          $("#d8").click(function(){
+          orderLao5(place,idAI);     
+           });
+          $("#d3").click(function(){
+            yelpShelp(place,idAI);
+          });
+
+console.log("aagai loa me id neeche",idAI);
+      }
+    }
+  }
+
+  function orderLao(place,idAI)
+  {
+    ////////////////////////////////////////////////LOWEST RATING///////////////////////////////////////////////////////
+    console.log("eh chaaak",idAI);
+    html_text="";
+    rev=place.reviews;
+    console.log("ye bi hhhh",place);
+     function GetSortOrder(prop) {  
+                          return function(a, b) {  
+                              if (a[prop] > b[prop]) {  
+                                  return 1;  
+                              } else if (a[prop] < b[prop]) {  
+                                  return -1;  
+                              }  
+                              return 0;  
+                          }  
+                      }  
+                      
+                     rev.sort(GetSortOrder("rating")); //passing attribute   
+
+                      
+                      
+                      html_text+="<div class='container-fluid'>";
+                      html_text+="<div class='row'>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<button class='btn btn-secondary dropdown-toggle' type='button1' value='aa' id='d1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Google Reviews</button>";
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink1>";
+                       html_text+="<button class='dropdown-item'></button>";
+                       html_text+="<button class='dropdown-item' id=\"d2\" value=\"ab\">Google Reviews</button><br>";
+                      html_text+="<button class='dropdown-item' value='ac' id='d3'>Yelp Reviews</button>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<a class='btn btn-secondary dropdown-toggle' type='button' value=\"abra\" id=\"katabra\" data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Default Rating</a>";
+
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink2'>";
+                      html_text+="<button class='dropdown-item' id=\"d4\" value=\"ad\">Default Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d5\" value=\"ae\">Highest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d6\" value=\"af\">Lowest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d7\" value=\"ag\">Most Recent</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d8\" value=\"ah\">Least Recent</button><br>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      
+                      
+                                var authName, ratingZ, timez, timedez, profilePic, revText, urllz;
+
+                                if(!rev=="")
+                                    {
+                                html_text+="<div id=\"revTable\" class=\"table-responsive\">";
+                                html_text+="<table id=\"reviewTable\" border=\"1px\" align=\"center\">";
+      
+                                    for(i=0;i<rev.length;i++)
+                                    {
+                
+                                      currReview=rev[i];
+                                    var keyRev=Object.keys(currReview);
+
+                                    for(j=0;j<keyRev.length;j++)
+                                    { 
+                                       if(keyRev[j]=="author_name")
+                                             {  
+                                                authName=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="profile_photo_url")
+                                             {
+                                                profilePic=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="text")
+                                             {
+                                                revText=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="rating")
+                                             {
+                                                ratingZ=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="time")
+                                             {
+                                                timez=currReview[keyRev[j]];
+                                             }
+                                        if(keyRev[j]=="author_url")
+                     {
+                        urllz=currReview[keyRev[j]];
+                     }
+              }
+
+                    var utcSeco = timez;
+                    var d = new Date(0);
+                    d.setUTCSeconds(utcSeco);
+                       
+                         html_text+="<tr id=\"revRow1\"><td id=\"id01\"><a href="+urllz+"><img class=\"thumbnail\" src="+profilePic+" alt=\"No picture\"/></a></td><td><a href="+urllz+">"+authName+"</a><br>"+ratingZ+" Stars, "+d+"<p>"+revText+"</p></td></tr>";
+                                          
+                                    }
+                                     html_text+="</table>";
+                                     html_text+="</div>"; 
+                                    html_text+="</div>";
+                                   }
+                                 
+                                document.getElementById("upbarAndFurther").innerHTML=html_text;
+                                document.getElementById("map").innerHTML="";
+                                document.getElementById("mapKeneeche").innerHTML="";
+
+                                $("#d4").click(function(){
+                                orderLao2(place,idAI);
+                                 });
+                                 $("#d5").click(function(){
+                                orderLao3(place,idAI);
+                                 });
+                                 $("#d2").click(function(){
+         reviewShivyu(idAI);
+          });
+                                 $("#d7").click(function(){
+                                    orderLao4(place,idAI);
+                                     });
+                                  $("#d8").click(function(){
+                                    orderLao5(place,idAI);
+                                     });
+                                  $("#d3").click(function(){
+            yelpShelp(place,idAI);
+          });  
+
+}
+
+
+ function orderLao2(place,idAI)
+  {
+    ////////////////////////////////////////////////DEFAULT RATING///////////////////////////////////////////////////////
+    console.log("aagai id default wale me",idAI);
+    html_text="";
+    rev=place.reviews;
+    console.log("ab dubara aya default",place);
+    
+
+                  function callback(place, status)
+  {
+    if (status == google.maps.places.PlacesServiceStatus.OK)
+    {     
+                     
+                      html_text+="<div class='container-fluid'>";
+                      html_text+="<div class='row'>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<button class='btn btn-secondary dropdown-toggle' type='button1' value='aa' id='d1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Google Reviews</button>";
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink1>";
+                       html_text+="<button class='dropdown-item'></button>";
+                       html_text+="<button class='dropdown-item' id=\"d2\" value=\"ab\">Google Reviews</button><br>";
+                      html_text+="<button class='dropdown-item' value='ac' id='d3'>Yelp Reviews</button>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<a class='btn btn-secondary dropdown-toggle' type='button' value=\"abra\" id=\"katabra\" data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Default Rating</a>";
+
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink2'>";
+                      html_text+="<button class='dropdown-item' id=\"d4\" value=\"ad\">Default Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d5\" value=\"ae\">Highest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d6\" value=\"af\">Lowest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d7\" value=\"ag\">Most Recent</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d8\" value=\"ah\">Least Recent</button><br>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                  
+
+                                var authName, ratingZ, timez, timedez, profilePic, revText, urllz;
+
+                                if(!rev=="")
+                                    {
+                                html_text+="<div id=\"revTable\" class=\"table-responsive\">";
+                                html_text+="<table id=\"reviewTable\" align=\"center\">";
+            
+                                    for(i=0;i<rev.length;i++)
+                                    {
+            
+                                      currReview=rev[i];
+                                    var keyRev=Object.keys(currReview);
+
+                                    for(j=0;j<keyRev.length;j++)
+                                    { 
+                                       if(keyRev[j]=="author_name")
+                                             {  
+                                                authName=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="profile_photo_url")
+                                             {
+                                                profilePic=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="text")
+                                             {
+                                                revText=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="rating")
+                                             {
+                                                ratingZ=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="time")
+                                             {
+                                                timez=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="author_url")
+                     {
+                        urllz=currReview[keyRev[j]];
+                     }
+              }
+
+                    var utcSeco = timez;
+                    var d = new Date(0);
+                    d.setUTCSeconds(utcSeco);
+                       
+                         html_text+="<tr id=\"revRow1\"><td id=\"id01\"><a href="+urllz+"><img class=\"thumbnail\" src="+profilePic+" alt=\"No picture\"/></a></td><td><a href="+urllz+">"+authName+"</a><br>"+ratingZ+" Stars, "+d+"<p>"+revText+"</p></td></tr>";
+                                              
+                                          
+                                    }
+                                     html_text+="</table>";
+                                     html_text+="</div>"; 
+html_text+="</div>";
+                                   }
+                                 
+                                document.getElementById("upbarAndFurther").innerHTML=html_text;
+                                document.getElementById("map").innerHTML="";
+                                document.getElementById("mapKeneeche").innerHTML="";
+
+                                $("#d6").click(function(){
+                                 orderLao(place,idAI);
+                                     });
+                                 $("#d5").click(function(){
+                                orderLao3(place,idAI);
+                                 });
+                                 $("#d2").click(function(){
+         reviewShivyu(idAI);
+          });
+                                $("#d7").click(function(){
+                                orderLao4(place,idAI);
+                                 });
+                                 $("#d8").click(function(){
+                                    orderLao5(place,idAI);
+                                     });
+                                 $("#d3").click(function(){
+            yelpShelp(place,idAI);
+          });  
+}}
+}
+ function orderLao3(place,idAI)
+  {
+    ////////////////////////////////////////////////HIGHEST RATING///////////////////////////////////////////////////////
+    html_text="";
+    rev=place.reviews;
+    console.log("high end",place);
+     function GetSortOrder2(prop) {  
+                          return function(a, b) {  
+                              if (a[prop] < b[prop]) {  
+                                  return 1;  
+                              } else if (a[prop] > b[prop]) {  
+                                  return -1;  
+                              }  
+                              return 0;  
+                          }  
+                      }  
+                      
+                     rev.sort(GetSortOrder2("rating")); //passing attribute   
+
+                     
+                     
+                      html_text+="<div class='container-fluid'>";
+                      html_text+="<div class='row'>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<button class='btn btn-secondary dropdown-toggle' type='button1' value='aa' id='d1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Google Reviews</button>";
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink1>";
+                       html_text+="<button class='dropdown-item'></button>";
+                       html_text+="<button class='dropdown-item' id=\"d2\" value=\"ab\">Google Reviews</button><br>";
+                      html_text+="<button class='dropdown-item' value='ac' id='d3'>Yelp Reviews</button>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<a class='btn btn-secondary dropdown-toggle' type='button' value=\"abra\" id=\"katabra\" data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Default Rating</a>";
+
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink2'>";
+                      html_text+="<button class='dropdown-item' id=\"d4\" value=\"ad\">Default Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d5\" value=\"ae\">Highest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d6\" value=\"af\">Lowest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d7\" value=\"ag\">Most Recent</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d8\" value=\"ah\">Least Recent</button><br>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+        
+                      
+                                var authName, ratingZ, timez, timedez, profilePic, revText, urllz;
+
+                                if(!rev=="")
+                                    {
+                                html_text+="<div id=\"revTable\" class=\"table-responsive\">";
+                                html_text+="<table id=\"reviewTable\" align=\"center\">";
+                                var count=0;
+                                    for(i=0;i<rev.length;i++)
+                                    {
+                          
+                                      currReview=rev[i];
+                                    var keyRev=Object.keys(currReview);
+
+                                    for(j=0;j<keyRev.length;j++)
+                                    { 
+                                       if(keyRev[j]=="author_name")
+                                             {  
+                                                authName=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="profile_photo_url")
+                                             {
+                                                profilePic=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="text")
+                                             {
+                                                revText=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="rating")
+                                             {
+                                                ratingZ=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="time")
+                                             {
+                                                timez=currReview[keyRev[j]];
+                                             }
+                                        if(keyRev[j]=="author_url")
+                     {
+                        urllz=currReview[keyRev[j]];
+                     }
+              }
+
+                    var utcSeco = timez;
+                    var d = new Date(0);
+                    d.setUTCSeconds(utcSeco);
+                       
+                         html_text+="<tr id=\"revRow1\"><td id=\"id01\"><a href="+urllz+"><img class=\"thumbnail\" src="+profilePic+" alt=\"\"/></a></td><td><a href="+urllz+">"+authName+"</a><br>"+ratingZ+" Stars, "+d+"<p>"+revText+"</p></td></tr>";
+                                          
+                                    }
+                                     html_text+="</table>";
+                                     html_text+="</div>"; 
+html_text+="</div>";
+                                   }
+                                 
+                                document.getElementById("upbarAndFurther").innerHTML=html_text;
+                                document.getElementById("map").innerHTML="";
+                                document.getElementById("mapKeneeche").innerHTML="";
+                                $("#d2").click(function(){
+         reviewShivyu(idAI);
+          });
+                                $("#d4").click(function(){
+                                orderLao2(place,idAI);
+                                 });
+                                 $("#d6").click(function(){
+                                orderLao(place,idAI);
+                                 });
+                                $("#d7").click(function(){
+                                    orderLao4(place,idAI);
+                                     });
+                                  $("#d8").click(function(){
+                                    orderLao5(place,idAI);
+                                     });
+                                  $("#d3").click(function(){
+            yelpShelp(place,idAI);
+          });  
+
+}
+ function orderLao4(place,idAI)
+  {
+    ////////////////////////////////////////////////least recent RATING///////////////////////////////////////////////////////
+    html_text="";
+    rev=place.reviews;
+    console.log("high end",place);
+     function GetSortOrder2(prop) {  
+                          return function(a, b) {  
+                              if (a[prop] < b[prop]) {  
+                                  return 1;  
+                              } else if (a[prop] > b[prop]) {  
+                                  return -1;  
+                              }  
+                              return 0;  
+                          }  
+                      }  
+                      
+                     rev.sort(GetSortOrder2("time")); //passing attribute   
+
+                      
+                      html_text+="<div class='container-fluid'>";
+                      html_text+="<div class='row'>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<button class='btn btn-secondary dropdown-toggle' type='button1' value='aa' id='d1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Google Reviews</button>";
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink1>";
+                       html_text+="<button class='dropdown-item'></button>";
+                       html_text+="<button class='dropdown-item' id=\"d2\" value=\"ab\">Google Reviews</button><br>";
+                      html_text+="<button class='dropdown-item' value='ac' id='d3'>Yelp Reviews</button>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<a class='btn btn-secondary dropdown-toggle' type='button' value=\"abra\" id=\"katabra\" data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Default Rating</a>";
+
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink2'>";
+                      html_text+="<button class='dropdown-item' id=\"d4\" value=\"ad\">Default Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d5\" value=\"ae\">Highest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d6\" value=\"af\">Lowest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d7\" value=\"ag\">Most Recent</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d8\" value=\"ah\">Least Recent</button><br>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                
+                      
+                                var authName, ratingZ, timez, timedez, profilePic, revText, urllz;
+
+                                if(!rev=="")
+                                    {
+                                html_text+="<div id=\"revTable\" class=\"table-responsive\">";
+                                html_text+="<table id=\"reviewTable\" border=\"1px\" align=\"center\">";
+                                var count=0;
+                                    for(i=0;i<rev.length;i++)
+                                    {
+  
+                                      currReview=rev[i];
+                                    var keyRev=Object.keys(currReview);
+
+                                    for(j=0;j<keyRev.length;j++)
+                                    { 
+                                       if(keyRev[j]=="author_name")
+                                             {  
+                                                authName=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="profile_photo_url")
+                                             {
+                                                profilePic=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="text")
+                                             {
+                                                revText=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="rating")
+                                             {
+                                                ratingZ=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="time")
+                                             {
+                                                timez=currReview[keyRev[j]];
+                                             }
+                                        if(keyRev[j]=="author_url")
+                     {
+                        urllz=currReview[keyRev[j]];
+                     }
+              }
+
+                    var utcSeco = timez;
+                    var d = new Date(0);
+                    d.setUTCSeconds(utcSeco);
+                       
+                         html_text+="<tr id=\"revRow1\"><td id=\"id01\"><a href="+urllz+"><img class=\"thumbnail\" src="+profilePic+" alt=\"\"/></a></td><td><a href="+urllz+">"+authName+"</a><br>"+ratingZ+" Stars, "+d+"<p>"+revText+"</p></td></tr>";
+                                          
+                                    }
+                                     html_text+="</table>";
+                                     html_text+="</div>"; 
+html_text+="</div>";
+                                   }
+                                 
+                                document.getElementById("upbarAndFurther").innerHTML=html_text;
+                                document.getElementById("map").innerHTML="";
+                                document.getElementById("mapKeneeche").innerHTML="";
+                                $("#d2").click(function(){
+         reviewShivyu(idAI);
+          });
+
+                                $("#d4").click(function(){
+                                orderLao2(place,idAI);
+                                 });
+                                 $("#d6").click(function(){
+                                orderLao(place,idAI);
+                                 });
+                                  $("#d8").click(function(){
+                                    orderLao5(place,idAI);
+                                     });
+                                        $("#d5").click(function(){
+                                            orderLao3(place,idAI); });  
+                                            $("#d3").click(function(){
+            yelpShelp(place,idAI);
+          });                 
+
+}
+function orderLao5(place,idAI)
+  {
+    ////////////////////////////////////////////////Most recent RATING///////////////////////////////////////////////////////
+    html_text="";
+    rev=place.reviews;
+    console.log("broo end",place);
+     function GetSortOrder2(prop) {  
+                          return function(a, b) {  
+                              if (a[prop] > b[prop]) {  
+                                  return 1;  
+                              } else if (a[prop] < b[prop]) {  
+                                  return -1;  
+                              }  
+                              return 0;  
+                          }  
+                      }  
+                      
+                     rev.sort(GetSortOrder2("time")); //passing attribute   
+
+                     
+                      html_text+="<div class='container-fluid'>";
+                      html_text+="<div class='row'>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<button class='btn btn-secondary dropdown-toggle' type='button1' value='aa' id='d1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Google Reviews</button>";
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink1>";
+                       html_text+="<button class='dropdown-item'></button>";
+                       html_text+="<button class='dropdown-item' id=\"d2\" value=\"ab\">Google Reviews</button><br>";
+                      html_text+="<button class='dropdown-item' value='ac' id='d3'>Yelp Reviews</button>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<a class='btn btn-secondary dropdown-toggle' type='button' value=\"abra\" id=\"katabra\" data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Default Rating</a>";
+
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink2'>";
+                      html_text+="<button class='dropdown-item' id=\"d4\" value=\"ad\">Default Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d5\" value=\"ae\">Highest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d6\" value=\"af\">Lowest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d7\" value=\"ag\">Most Recent</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d8\" value=\"ah\">Least Recent</button><br>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+            
+                      
+                                var authName, ratingZ, timez, timedez, profilePic, revText, urllz;
+
+                                if(!rev=="")
+                                    {
+                                html_text+="<div id=\"revTable\" class=\"table-responsive\">";
+                                html_text+="<table id=\"reviewTable\" align=\"center\">";
+                                var count=0;
+                                    for(i=0;i<rev.length;i++)
+                                    {
+      
+                                      currReview=rev[i];
+                                    var keyRev=Object.keys(currReview);
+
+                                    for(j=0;j<keyRev.length;j++)
+                                    { 
+                                       if(keyRev[j]=="author_name")
+                                             {  
+                                                authName=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="profile_photo_url")
+                                             {
+                                                profilePic=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="text")
+                                             {
+                                                revText=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="rating")
+                                             {
+                                                ratingZ=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="time")
+                                             {
+                                                timez=currReview[keyRev[j]];
+                                             }
+                                       if(keyRev[j]=="author_url")
+                     {
+                        urllz=currReview[keyRev[j]];
+                     }
+              }
+
+                    var utcSeco = timez;
+                    var d = new Date(0);
+                    d.setUTCSeconds(utcSeco);
+                       
+                         html_text+="<tr id=\"revRow1\"><td id=\"id01\"><a href="+urllz+"><img class=\"thumbnail\" src="+profilePic+" alt=\"\"/></a></td><td><a href="+urllz+">"+authName+"</a><br><div id='dedoRatId'>"+ratingZ+"</div> Stars, "+d+"<p >"+revText+"</p></td></tr>";
+                                              
+                                          $(function () {
+                                          $("#dedoRatId").rateYo({
+                                            rating: ratingZ
+                                          });
+                                        });
+                                        }
+                                     html_text+="</table>";
+                                     html_text+="</div>"; 
+html_text+="</div>";
+                                   }
+                                 
+                                document.getElementById("upbarAndFurther").innerHTML=html_text;
+                                document.getElementById("map").innerHTML="";
+                                document.getElementById("mapKeneeche").innerHTML="";
+
+                                $("#d4").click(function(){
+                                orderLao2(place,idAI);
+                                 });
+                                 $("#d6").click(function(){
+                                orderLao(place,idAI);
+                                 });
+                                  $("#d7").click(function(){
+                                    orderLao4(place,idAI);
+                                     });
+                                        $("#d5").click(function(){
+                                            orderLao3(place,idAI); });         
+                                            $("#d3").click(function(){
+            yelpShelp(place,idAI);
+          });          
+$("#d2").click(function(){
+         reviewShivyu(idAI);
+          });
+}
+
+function yelpShelp(place,idAI)
+{ 
+  var city="";
+  var state="";
+  var country="";
+  var babare="";
+  console.log("inside yelp shelp",place);
+  var yelpArray=place.address_components;
+  console.log("yelp array",yelpArray);
+  for(i=0;i<yelpArray.length;i++)
+            {
+              console.log(yelpArray[0]);
+              for(j=0;j<yelpArray[i].types.length;j++)
+              {
+                if(yelpArray[i].types[j]=="locality")
+                {
+                  console.log("done");
+                  city=yelpArray[i].long_name;
+                }
+                if(yelpArray[i].types[j]=="administrative_area_level_1")
+                {
+                  console.log("done");
+                  state=yelpArray[i].short_name;
+                }
+                if(yelpArray[i].types[j]=="country")
+                {
+                  console.log("done");
+                  country=yelpArray[i].short_name;
+                }
+              }
+          }
+          console.log("yelpuSingh",city);
+                console.log("yelpuSingh",state);
+                 console.log("yelpuSingh",country);
+          var cityzz=city;
+          var statezz=state;
+          var countryzz=country;
+          var nameyelp=place.name;
+          var adddr=place.formatted_address;
+    $.ajax(
+          {
+            url: "/yelpBanaing?nameyelp="+nameyelp+"&adddr="+adddr+"&cityzz="+cityzz+"&statezz="+statezz+"&country="+countryzz,
+            type: "GET",
+
+            success: function(data)
+            {
+              if (!data.businesses[0])
+      {
+        html_text="";
+        
+                      html_text+="<div class='container-fluid'>";
+                      html_text+="<div class='row'>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<button class='btn btn-secondary dropdown-toggle' type='button1' value='aa' id='d1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Google Reviews</button>";
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink1>";
+                       html_text+="<button class='dropdown-item'></button>";
+                       html_text+="<button class='dropdown-item' id=\"d2\" value=\"ab\">Google Reviews</button><br>";
+                      html_text+="<button class='dropdown-item' value='ac' id='d3'>Yelp Reviews</button>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<a class='btn btn-secondary dropdown-toggle' type='button' value=\"abra\" id=\"katabra\" data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Default Rating</a>";
+
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink2'>";
+                      html_text+="<button class='dropdown-item' id=\"d4\" value=\"ad\">Default Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d5\" value=\"ae\">Highest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d6\" value=\"af\">Lowest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d7\" value=\"ag\">Most Recent</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d8\" value=\"ah\">Least Recent</button><br>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+         document.getElementById("upbarAndFurther").innerHTML=html_text;
+        html_text+="<table class=\"text-center\" id=\"noRecordTable\" align=\"center\"><tr><td> NO REVIEWS HAVE BEEN FOUND</td></tr>";
+        html_text+="</table>"
+        html_text+="</div>";
+         document.getElementById("upbarAndFurther").innerHTML=html_text;
+         document.getElementById("map").innerHTML="";
+         document.getElementById("mapKeneeche").innerHTML="";
+      }
+      else{
+               babare = data;
+                console.log('success555555',babare);
+               yelpTable(babare,idAI);
+             }
+            }
+          }) 
+}
+function yelpTable(babare,idAI)
+{
+  console.log(babare.businesses);
+ 
+    var naviTaziId=babare.businesses[0].id;
+  console.log("naviTaziId",naviTaziId);
+  $.ajax(
+          {
+            url: "/yelpKaTable?naviTaziId="+naviTaziId,
+            type: "GET",
+
+            success: function(data)
+            {
+               shabash = data;
+                //console.log('success66666',shabash);
+               yelpTableFinal(shabash,idAI);
+            }
+          }) 
+}
+function yelpTableFinal(shabash,idAI)
+{
+   html_text="";
+    rev=shabash.reviews;
+
+
+     
+console.log("final yelp table is here",rev);
+                     
+                      html_text+="<div class='container-fluid'>";
+                      html_text+="<div class='row'>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<button class='btn btn-secondary dropdown-toggle' type='button1' value='aa' id='d1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Google Reviews</button>";
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink1>";
+                       html_text+="<button class='dropdown-item'></button>";
+                       html_text+="<button class='dropdown-item' id=\"d2\" value=\"ab\">Google Reviews</button><br>";
+                      html_text+="<button class='dropdown-item' value='ac' id='d3'>Yelp Reviews</button>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<a class='btn btn-secondary dropdown-toggle' type='button' value=\"abra\" id=\"katabra\" data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Default Rating</a>";
+
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink2'>";
+                      html_text+="<button class='dropdown-item' id=\"d4\" value=\"ad\">Default Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d5\" value=\"ae\">Highest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d6\" value=\"af\">Lowest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d7\" value=\"ag\">Most Recent</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d8\" value=\"ah\">Least Recent</button><br>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      
+                                var authName, ratingZ, timez, timedez, profilePic, revText, urllz;
+
+                                if(!rev=="")
+                                    {
+                                html_text+="<div id=\"revTable\" class=\"table-responsive\">";
+                                html_text+="<table id=\"reviewTable\" align=\"center\">";
+                        
+                                    for(i=0;i<rev.length;i++)
+                                    {
+                                      console.log("pehle yelp me"); 
+                                       if(rev[i].user)
+                                       {                                      
+                                             {
+                                                profilePic=rev[i].user.image_url;
+                                             }                                    
+                                     console.log("pehle yelp me");
+                                             {  
+                                                authName=rev[i].user.name;
+                                             }
+                                       }
+                                       if(rev[i].text)
+                                             {
+                                                revText=rev[i].text;
+                                             }
+                                       if(rev[i].rating)
+                                             {
+                                                ratingZ=rev[i].rating;      
+                                              }
+                                       if(rev[i].time_created)
+                                             {
+                                                timez=rev[i].time_created;
+                                             }
+                                       if(rev[i].url)
+                                             {
+                                                urllz=rev[i].url;
+                                             }
+              
+
+                       
+                         html_text+="<tr id=\"revRow1\"><td id=\"id01\"><a href="+urllz+" id='yelpWalipics'><img class=\"thumbnail\"  src="+profilePic+" alt=\"\"/></a></td><td><a href="+urllz+">"+authName+"</a><br>"+ratingZ+" Stars, "+timez+"<p >"+revText+"</p></td></tr>";
+                                              
+                                          
+                                    }
+                                     html_text+="</table>";
+                                     html_text+="</div>"; 
+html_text+="</div>";
+                                   }
+                                 
+                                document.getElementById("upbarAndFurther").innerHTML=html_text;
+                                document.getElementById("map").innerHTML=""; 
+                                document.getElementById("mapKeneeche").innerHTML="";
+
+                                $("#d4").click(function(){
+          console.log("aagai lao me idddddd",idAI);
+         orderLao2(place,idAI);
+          });
+        $("#d6").click(function(){
+         yelpTableFinal2(shabash,idAI);
+          });
+         $("#d5").click(function(){
+          orderLao3(shabash,idAI);
+           });
+         $("#d7").click(function(){
+          orderLao4(shabash,idAI);
+           });
+          $("#d8").click(function(){
+          yelpTableFinal6(shabash,idAI);     
+           });
+          $("#d3").click(function(){
+            yelpShelp(shabash,idAI);
+          });   
+          $("#d2").click(function(){
+         reviewShivyu(idAI);
+          });         
+}
+function yelpTableFinal2(place,idAI)
+{
+  ////////////////////////////////////////////////LOWEST RATING///////////////////////////////////////////////////////
+   html_text="";
+    rev=place.reviews;
+    //console.log("broo end",shabash);
+     function GetSortOrder2(prop) {  
+                          return function(a, b) {  
+                              if (a[prop] > b[prop]) {  
+                                  return 1;  
+                              } else if (a[prop] < b[prop]) {  
+                                  return -1;  
+                              }  
+                              return 0;  
+                          }  
+                      }  
+                      
+                    rev.sort(GetSortOrder2("rating")); //passing attribute   
+
+                      
+                      html_text+="<div class='container-fluid'>";
+                      html_text+="<div class='row'>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<button class='btn btn-secondary dropdown-toggle' type='button1' value='aa' id='d1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Google Reviews</button>";
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink1>";
+                       html_text+="<button class='dropdown-item'></button>";
+                       html_text+="<button class='dropdown-item' id=\"d2\" value=\"ab\">Google Reviews</button><br>";
+                      html_text+="<button class='dropdown-item' value='ac' id='d3'>Yelp Reviews</button>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<a class='btn btn-secondary dropdown-toggle' type='button' value=\"abra\" id=\"katabra\" data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Default Rating</a>";
+
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink2'>";
+                      html_text+="<button class='dropdown-item' id=\"d4\" value=\"ad\">Default Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d5\" value=\"ae\">Highest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d6\" value=\"af\">Lowest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d7\" value=\"ag\">Most Recent</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d8\" value=\"ah\">Least Recent</button><br>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+              
+                      
+                                var authName, ratingZ, timez, timedez, profilePic, revText, urllz;
+
+                                if(!rev=="")
+                                    {
+                                html_text+="<div id=\"revTable\" class=\"table-responsive\">";
+                                html_text+="<table id=\"reviewTable\" align=\"center\">";
+                        
+                                    for(i=0;i<rev.length;i++)
+                                    {
+                                      console.log("pehle yelp me"); 
+                                       if(rev[i].user)
+                                       {                                      
+                                             {
+                                                profilePic=rev[i].user.image_url;
+                                             }                                    
+                                     console.log("pehle yelp me");
+                                             {  
+                                                authName=rev[i].user.name;
+                                             }
+                                       }
+                                       if(rev[i].text)
+                                             {
+                                                revText=rev[i].text;
+                                             }
+                                       if(rev[i].rating)
+                                             {
+                                                ratingZ=rev[i].rating;
+                                             }
+                                       if(rev[i].time_created)
+                                             {
+                                                timez=rev[i].time_created;
+                                             }
+                                       if(rev[i].url)
+                                             {
+                                                urllz=rev[i].url;
+                                             }
+              
+
+                       
+                         html_text+="<tr id=\"revRow1\"><td id=\"id01\"><a href="+urllz+" id='yelpWalipics'><img class=\"thumbnail\" src="+profilePic+" alt=\"\"/></a></td><td><a href="+urllz+">"+authName+"</a><br>"+ratingZ+" Stars, "+timez+"<p>"+revText+"</p></td></tr>";
+                                              
+                                          
+                                    }
+                                     html_text+="</table>";
+                                     html_text+="</div>"; 
+html_text+="</div>";
+                                   }
+                                 
+                                document.getElementById("upbarAndFurther").innerHTML=html_text;
+                                document.getElementById("map").innerHTML=""; 
+                                document.getElementById("mapKeneeche").innerHTML="";
+
+
+         $("#d5").click(function(){
+          yelpTableFinal3(place,idAI,idAI);
+           });
+         $("#d7").click(function(){
+          yelpTableFinal5(place,idAI);
+           });
+          $("#d8").click(function(){
+          yelpTableFinal6(place,idAI);     
+           });
+          $("#d3").click(function(){
+            yelpShelp(place,idAI);
+          });            
+          $("#d2").click(function(){
+         reviewShivyu(idAI);
+          });
+}
+function yelpTableFinal3(place,idAI)
+{
+  ////////////////////////////////////////////////Highest RATING///////////////////////////////////////////////////////
+   html_text="";
+    rev=place.reviews;
+    var dt="";
+   // console.log("broo end",shabash);
+     function GetSortOrder2(prop) {  
+                          return function(a, b) {  
+                              if (a[prop] < b[prop]) {  
+                                  return 1;  
+                              } else if (a[prop] > b[prop]) {  
+                                  return -1;  
+                              }  
+                              return 0;  
+                          }  
+                      }  
+                      
+                    rev.sort(GetSortOrder2("rating")); //passing attribute   
+
+                      
+                      html_text+="<div class='container-fluid'>";
+                      html_text+="<div class='row'>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<button class='btn btn-secondary dropdown-toggle' type='button1' value='aa' id='d1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Google Reviews</button>";
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink1>";
+                       html_text+="<button class='dropdown-item'></button>";
+                       html_text+="<button class='dropdown-item' id=\"d2\" value=\"ab\">Google Reviews</button><br>";
+                      html_text+="<button class='dropdown-item' value='ac' id='d3'>Yelp Reviews</button>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<a class='btn btn-secondary dropdown-toggle' type='button' value=\"abra\" id=\"katabra\" data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Default Rating</a>";
+
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink2'>";
+                      html_text+="<button class='dropdown-item' id=\"d4\" value=\"ad\">Default Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d5\" value=\"ae\">Highest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d6\" value=\"af\">Lowest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d7\" value=\"ag\">Most Recent</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d8\" value=\"ah\">Least Recent</button><br>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+          
+                      
+                                var authName, ratingZ, timez, timedez, profilePic, revText, urllz;
+
+                                if(!rev=="")
+                                    {
+                                html_text+="<div id=\"revTable\" class=\"table-responsive\">";
+                                html_text+="<table id=\"reviewTable\" align=\"center\">";
+                        
+                                    for(i=0;i<rev.length;i++)
+                                    {
+                                      console.log("pehle yelp me"); 
+                                       if(rev[i].user)
+                                       {                                      
+                                             {
+                                                profilePic=rev[i].user.image_url;
+                                             }                                    
+                                     console.log("pehle yelp me");
+                                             {  
+                                                authName=rev[i].user.name;
+                                             }
+                                       }
+                                       if(rev[i].text)
+                                             {
+                                                revText=rev[i].text;
+                                             }
+                                       if(rev[i].rating)
+                                             {
+                                                ratingZ=rev[i].rating;
+                                             }
+                                       if(rev[i].time_created)
+                                             {
+                                                timez=rev[i].time_created;
+                                             }
+                                       if(rev[i].url)
+                                             {
+                                                urllz=rev[i].url;
+                                             }
+              
+
+                       
+                         html_text+="<tr id=\"revRow1\"><td id=\"id01\"><a href="+urllz+" id='yelpWalipics'><img class=\"thumbnail\" src="+profilePic+" alt=\"\"/></a></td><td><a href="+urllz+">"+authName+"</a><br>"+ratingZ+" Stars, "+timez+"<p>"+revText+"</p></td></tr>";
+                                              
+                                          
+                                    }
+                                     html_text+="</table>";
+                                     html_text+="</div>"; 
+html_text+="</div>";
+                                   }
+                                 
+                                document.getElementById("upbarAndFurther").innerHTML=html_text;
+                                document.getElementById("map").innerHTML=""; 
+                                document.getElementById("mapKeneeche").innerHTML="";
+
+                                $("#d4").click(function(){
+          console.log("aagai lao me idddddd",idAI);
+         orderLao2(place,idAI);
+          });
+        $("#d6").click(function(){
+         yelpTableFinal2(place,idAI);
+          });
+         $("#d7").click(function(){
+          yelpTableFinal5(place,idAI);
+           });
+          $("#d8").click(function(){
+          yelpTableFinal6(place,idAI);     
+           });
+          $("#d3").click(function(){
+            yelpShelp(place,idAI);
+          });  
+          $("#d2").click(function(){
+         reviewShivyu(idAI);
+          });          
+ 
+}
+function yelpTableFinal5(place,idAI)
+{
+  ////////////////////////////////////////////////Most Recent///////////////////////////////////////////////////////
+   html_text="";
+    rev=place.reviews;
+    rev2=place.reviews.time_created;
+    var dt="";
+    var time_created="";
+    //console.log("broo end",shabash);
+                    //    function GetSortOrder2(prop) {  
+                    //        return function(a, b) {  
+                    //           if (new Date(a.prop) > new Date(b.prop)) {  
+                    //               return 1;  
+                    //           } else if (new Date(a.prop) < new Date(b.prop)) {  
+                    //               return -1;  
+                    //           }  
+                    //           return 0;  
+                    //       }  
+                    //   }  
+                      
+                    // rev.sort(GetSortOrder2(time_created)); //passing attribute  
+
+                      html_text+="<div class='container-fluid'>";
+                      html_text+="<div class='row'>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<button class='btn btn-secondary dropdown-toggle' type='button1' value='aa' id='d1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Google Reviews</button>";
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink1>";
+                       html_text+="<button class='dropdown-item'></button>";
+                       html_text+="<button class='dropdown-item' id=\"d2\" value=\"ab\">Google Reviews</button><br>";
+                      html_text+="<button class='dropdown-item' value='ac' id='d3'>Yelp Reviews</button>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<a class='btn btn-secondary dropdown-toggle' type='button' value=\"abra\" id=\"katabra\" data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Default Rating</a>";
+
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink2'>";
+                      html_text+="<button class='dropdown-item' id=\"d4\" value=\"ad\">Default Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d5\" value=\"ae\">Highest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d6\" value=\"af\">Lowest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d7\" value=\"ag\">Most Recent</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d8\" value=\"ah\">Least Recent</button><br>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+            
+                      
+                                var authName, ratingZ, timez, timedez, profilePic, revText, urllz;
+
+                                if(!rev=="")
+                                    {
+                                html_text+="<div id=\"revTable\" class=\"table-responsive\">";
+                                html_text+="<table id=\"reviewTable\" align=\"center\">";
+                        
+                                    for(i=0;i<rev.length;i++)
+                                    {
+                                      console.log("pehle yelp me"); 
+                                       if(rev[i].user)
+                                       {                                      
+                                             {
+                                                profilePic=rev[i].user.image_url;
+                                             }                                    
+                                     console.log("pehle yelp me");
+                                             {  
+                                                authName=rev[i].user.name;
+                                             }
+                                       }
+                                       if(rev[i].text)
+                                             {
+                                                revText=rev[i].text;
+                                             }
+                                       if(rev[i].rating)
+                                             {
+                                                ratingZ=rev[i].rating;
+                                             }
+                                       if(rev[i].time_created)
+                                             {
+                                                timez=rev[i].time_created;
+                                             }
+                                       if(rev[i].url)
+                                             {
+                                                urllz=rev[i].url;
+                                             }
+              
+
+                       
+                         html_text+="<tr id=\"revRow1\"><td id=\"id01\"><a href="+urllz+" id='yelpWalipics'><img class=\"thumbnail\" src="+profilePic+"  alt=\"\"/></a></td><td><a href="+urllz+">"+authName+"</a><br>"+ratingZ+" Stars, "+timez+"<p>"+revText+"</p></td></tr>";
+                                              
+                                          
+                                    }
+                                     html_text+="</table>";
+                                     html_text+="</div>"; 
+html_text+="</div>";
+                                   }
+                                 
+                                document.getElementById("upbarAndFurther").innerHTML=html_text;
+                                document.getElementById("map").innerHTML=""; 
+                                document.getElementById("mapKeneeche").innerHTML="";
+
+                               
+        $("#d6").click(function(){
+         yelpTableFinal2(place,idAI);
+          });
+        $("#d5").click(function(){
+         yelpTableFinal3(place,idAI);
+          });
+          $("#d8").click(function(){
+          yelpTableFinal6(place,idAI);     
+           });
+          $("#d3").click(function(){
+            yelpShelp(place,idAI);
+          });   
+          $("#d2").click(function(){
+         reviewShivyu(idAI);
+          });         
+ 
+}
+
+function yelpTableFinal6(place,idAI)
+{
+  ////////////////////////////////////////////////Least Recent///////////////////////////////////////////////////////
+   html_text="";
+    rev=place.reviews;
+    var dt="";
+    var time_created="";
+    //console.log("broo end",shabash);
+      //passing attribute   
+       // function GetSortOrder2(prop) {  
+       //                    return function(a, b) {  
+       //                        if (new Date(a.prop) < new Date(b.prop)) {  
+       //                            return 1;  
+       //                        } else if (new Date(a.prop) > new Date(b.prop)) {  
+       //                            return -1;  
+       //                        }  
+       //                        return 0;  
+       //                    }  
+       //                }  
+                      
+       //              rev.sort(function(aalu,kachalu){aalu.time_created=kachalu.time_created});
+
+                      html_text+="<div class='container-fluid'>";
+                      html_text+="<div class='row'>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<button class='btn btn-secondary dropdown-toggle' type='button1' value='aa' id='d1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Google Reviews</button>";
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink1>";
+                       html_text+="<button class='dropdown-item'></button>";
+                       html_text+="<button class='dropdown-item' id=\"d2\" value=\"ab\">Google Reviews</button><br>";
+                      html_text+="<button class='dropdown-item' value='ac' id='d3'>Yelp Reviews</button>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                       html_text+="</div>";
+                      html_text+="<div class='col-md-2'>";
+                      html_text+="<div class='dropdown show'>";
+                      html_text+="<a class='btn btn-secondary dropdown-toggle' type='button' value=\"abra\" id=\"katabra\" data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Default Rating</a>";
+
+                      html_text+="<div class='dropdown-menu' aria-labelledby='dropdownMenuLink2'>";
+                      html_text+="<button class='dropdown-item' id=\"d4\" value=\"ad\">Default Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d5\" value=\"ae\">Highest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d6\" value=\"af\">Lowest Rating</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d7\" value=\"ag\">Most Recent</button><br>";
+                      html_text+="<button class='dropdown-item' id=\"d8\" value=\"ah\">Least Recent</button><br>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      html_text+="</div>";
+                      
+                                var authName, ratingZ, timez, timedez, profilePic, revText, urllz;
+
+                                if(!rev=="")
+                                    {
+                                html_text+="<div id=\"revTable\" class=\"table-responsive\">";
+                                html_text+="<table id=\"reviewTable\" align=\"center\">";
+                        
+                                    for(i=0;i<rev.length;i++)
+                                    {
+                                      console.log("pehle yelp me"); 
+                                       if(rev[i].user)
+                                       {                                      
+                                             {
+                                                profilePic=rev[i].user.image_url;
+                                             }                                    
+                                     console.log("pehle yelp me");
+                                             {  
+                                                authName=rev[i].user.name;
+                                             }
+                                       }
+                                       if(rev[i].text)
+                                             {
+                                                revText=rev[i].text;
+                                             }
+                                       if(rev[i].rating)
+                                             {
+                                                ratingZ=rev[i].rating;
+                                             }
+                                       if(rev[i].time_created)
+                                             {
+                                                timez=rev[i].time_created;
+                                             }
+                                       if(rev[i].url)
+                                             {
+                                                urllz=rev[i].url;
+                                             }
+              
+
+                       
+                         html_text+="<tr id=\"revRow1\"><td id=\"id01\"><a href="+urllz+" id='yelpWalipics'><img class=\"thumbnail\" src="+profilePic+"  alt=\"\"/></a></td><td><a href="+urllz+">"+authName+"</a><br>"+ratingZ+" Stars, "+timez+"<p>"+revText+"</p></td></tr>";
+                                              
+                                          
+                                    }
+                                     html_text+="</table>";
+                                     html_text+="</div>"; 
+html_text+="</div>";
+                                   }
+                                 
+                                document.getElementById("upbarAndFurther").innerHTML=html_text;
+                                document.getElementById("map").innerHTML=""; 
+                                document.getElementById("mapKeneeche").innerHTML="";
+
+
+         $("#d5").click(function(){
+          yelpTableFinal3(place,idAI);
+           });
+         $("#d7").click(function(){
+          yelpTableFinal5(place,idAI);
+           });
+          $("#d6").click(function(){
+          yelpTableFinal2(place,idAI);
+           });
+          $("#d3").click(function(){
+            yelpShelp(place,idAI);
+          });     
+          $("#d2").click(function(){
+         reviewShivyu(idAI);
+          });       
+ 
+}
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+
+</body>
+</html>

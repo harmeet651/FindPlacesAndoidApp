@@ -1,0 +1,15 @@
+{
+  "name": "nodekb",
+  "version": "1.0.0",
+  "description": "simple app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "author": "Harmeet Singh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "body-parser": "*"
+  }
+}
